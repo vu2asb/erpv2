@@ -1,10 +1,17 @@
+"use client";
+
+import TopNavBar from "@/components/TopNavBar";
 
 const LoginPage = () => {
   return (
-    <div className="flex w-full h-full flex-col items-center justify-center bg-[#1E2225] text-[#F9FBFD]">
-      Login Page!
-    </div>
-  )
-}
+    <>
+      <div>
+        <main className="flex w-full h-full flex-col items-center justify-center">
+          <div>Login Page!</div>
+        </main>
+      </div>
+    </>
+  );
+};
 
 export default LoginPage;
