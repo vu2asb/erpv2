@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
-import TopNavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar";
 
 
 const font = Poppins({
@@ -13,7 +13,7 @@ const font = Poppins({
 export default function Home() {
   return (
     <>
-      <TopNavBar />
+      <NavBar />
       <main
         className="container flex h-full flex-col items-center justify-center"
       >

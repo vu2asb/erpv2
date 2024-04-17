@@ -1,6 +1,5 @@
 "use client";
 
-import TopNavBar from "@/components/TopNavBar";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 

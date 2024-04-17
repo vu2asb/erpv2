@@ -1,4 +1,4 @@
-import TopNavBar from "@/components/TopNavBar";
+import NavBar from "@/components/NavBar";
 import { Poppins } from "next/font/google";
 
 const font = Poppins({
@@ -9,7 +9,7 @@ const font = Poppins({
 const AuthLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <>
-    <TopNavBar />
+    <NavBar />
     <div className="h-full flex items-center justify-center">
       { children }
     </div>
