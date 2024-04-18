@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
 import NavBar from "@/components/NavBar";
+import HeroSection from "@/components/HeroSection";
+import Footer from "@/components/Footer";
 
 
 const font = Poppins({
@@ -14,29 +16,10 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <main
-        className="container flex h-full flex-col items-center justify-center"
-      >
-        <div className="space-y-6">
-          <div>
-            <h1
-              className={cn(
-                "text-6xl font-semibol",
-                font.className
-              )}
-            >
-              Home Page
-            </h1>
-          </div>
-          <div className="flex flex-col place-items-center">
-            <LoginButton>
-              <Button size="default">
-                Sign In
-              </Button>
-            </LoginButton>
-          </div>
-        </div>
-      </main>
+      <div className="min-h-svh max-w-7xl mx-auto pt-20 px-6">
+      <HeroSection />
+      </div>
+      <Footer />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import { Poppins } from "next/font/google";
 
@@ -10,9 +11,10 @@ const AuthLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <>
     <NavBar />
-    <div className="h-full flex items-center justify-center">
+    <div className="min-h-svh h-full flex items-center justify-center pb-[100px]">
       { children }
     </div>
+    <Footer />
     </>
   )
 }

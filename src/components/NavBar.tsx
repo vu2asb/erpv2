@@ -43,10 +43,13 @@ const NavBar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center space-x-8 items-center">
-            <a href="#" className="py-0 px-0 border rounded-md">
+            <a href="/auth/login" className="py-0 px-0 border rounded-md">
               Sign In
             </a>
             <a href="#" className="py-0 px-0 border rounded-md">
+              Sign Up
+            </a>
+            <a href="/auth/logout" className="py-0 px-0 border rounded-md">
               Sign Out
             </a>
             <ModeToggle />
@@ -67,10 +70,13 @@ const NavBar = () => {
               ))}
             </ul>
             <div className="flex space-x-6">
-              <a href="#" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
+              <a href="/auth/login" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
                 Sign In
               </a>
               <a href="#" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
+                Sign Up
+              </a>
+              <a href="/auth/logout" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
                 Sign Out
               </a>
               <ModeToggle />
