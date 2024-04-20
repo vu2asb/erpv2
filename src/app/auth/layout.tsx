@@ -11,7 +11,7 @@ const AuthLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <>
     <NavBar />
-    <div className="min-h-svh h-full flex items-center justify-center pb-[100px]">
+    <div className="min-h-svh flex items-center justify-center pb-[100px]">
       { children }
     </div>
     <Footer />

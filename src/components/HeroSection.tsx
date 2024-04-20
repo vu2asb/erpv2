@@ -11,7 +11,7 @@ const HeroSection = () => {
         <br/>
       </h1>
       <br/>
-      <p className="text-lg text-center tracking-wide text-neutral-400">Are you a small to medium sized software product or services enterprise with a broken delivery engine in urgent need for improvement and are ready for transformation?</p> 
+      <h1 className="text-lg text-center tracking-wide text-neutral-400">Is your small or medium-sized software product or services enterprise seeking urgent improvements to its delivery engine? If you're committed, driven, and have a reasonable budget for transformation, I'm here to help.</h1> 
     </div>
   );
 };
