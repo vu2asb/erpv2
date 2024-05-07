@@ -35,7 +35,7 @@ const NavBar = () => {
           </a>
 
 
-          <ul className="hidden lg:flex ml-14 space-x-12">
+          <ul className="hidden lg:flex ml-0 space-x-12"> {/*  ml-14  */}
             {navItems.map((item, index) => (
               <li key={index} className="py-4">
                 <a href={item.href}>{item.label}</a>
@@ -43,7 +43,7 @@ const NavBar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center space-x-8 items-center">
-            <a href="/auth/login" className="py-0 px-0 border rounded-md">
+            {/* <a href="/auth/login" className="py-0 px-0 border rounded-md">
               Sign In
             </a>
             <a href="#" className="py-0 px-0 border rounded-md">
@@ -51,7 +51,7 @@ const NavBar = () => {
             </a>
             <a href="/auth/logout" className="py-0 px-0 border rounded-md">
               Sign Out
-            </a>
+            </a> */}
             <ModeToggle />
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
@@ -61,7 +61,7 @@ const NavBar = () => {
           </div>
         </div>
         {mobileDrawerOpen && (
-          <div className="fixed right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden">
+          <div className="fixed right-02 z-0 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center text-center lg:hidden">
             <ul className="text-white">
               {navItems.map((item, index) => (
                 <li key={index} className="py-4">
@@ -70,7 +70,7 @@ const NavBar = () => {
               ))}
             </ul>
             <div className="flex space-x-6">
-              <a href="/auth/login" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
+              {/* <a href="/auth/login" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
                 Sign In
               </a>
               <a href="#" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
@@ -78,7 +78,7 @@ const NavBar = () => {
               </a>
               <a href="/auth/logout" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
                 Sign Out
-              </a>
+              </a> */}
               <ModeToggle />
             </div>
           </div>

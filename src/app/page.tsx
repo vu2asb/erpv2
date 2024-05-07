@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 
 const font = Poppins({
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["600"]
 });
 
 export default function Home() {
