@@ -4,7 +4,7 @@ const AboutSection = () => {
   return (
     <div className="flex flex-col item-center mt-2 lg:mt-2">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
-        Namaskar
+        ABOUT ME
         <br></br>
         <span className="text-2xl bg-gradient-to-r from-orange-400 to-red-600 text-transparent bg-clip-text">
           Differentiated Value -thru- Differentiated Capability
@@ -57,7 +57,14 @@ const AboutSection = () => {
         technology or to outsource it. That's where I come in to assist
         startups.
       </h2>
-      <Button className="mt-6 text-[20px] ">See how I can help You!</Button>
+      <div>
+      {/* <Button className="mt-6 text-[20px] ">Free Consultation</Button> */}
+      <div className="sm: mt-6 flex flex-col space-y-2 text-center justify-center md:flex-row gap-2">
+        <a href="" className="sm: w-full bg-slate-100 text-black px-3 py-2 border-solid md:w-[30%] mt-2 lg:w-[25%]">Read More</a>
+        <a href="" className="sm: w-full  bg-primary text-white  px-3 py-2 border-solid md:w-[30%] mt-2 lg:w-[25%]">Free Consultation</a>
+      </div>
+
+      </div>
     </div>
   );
 };

@@ -34,8 +34,9 @@ const NavBar = () => {
             </div>
           </a>
 
-
-          <ul className="hidden lg:flex ml-0 space-x-12"> {/*  ml-14  */}
+          <ul className="hidden lg:flex ml-0 space-x-12">
+            {" "}
+            {/*  ml-14  */}
             {navItems.map((item, index) => (
               <li key={index} className="py-4">
                 <a href={item.href}>{item.label}</a>
@@ -43,20 +44,22 @@ const NavBar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center space-x-8 items-center">
-            {/* <a href="/auth/login" className="py-0 px-0 border rounded-md">
+            <a href="/auth/login" className="py-2 px-4 border border-red-500">
               Sign In
             </a>
-            <a href="#" className="py-0 px-0 border rounded-md">
+            <a href="#" className="py-2 px-4 border border-red-500">
               Sign Up
             </a>
-            <a href="/auth/logout" className="py-0 px-0 border rounded-md">
+            {/* <a href="/auth/logout" className="py-2 px-4 border border-red-500">
               Sign Out
             </a> */}
-            <ModeToggle />
+            <div className="border border-red-500">
+              <ModeToggle />
+            </div>
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
             <button onClick={toggleNavBar}>
-            {mobileDrawerOpen ? <ImCross /> : <GiHamburgerMenu />}              
+              {mobileDrawerOpen ? <ImCross /> : <GiHamburgerMenu />}
             </button>
           </div>
         </div>
@@ -70,16 +73,24 @@ const NavBar = () => {
               ))}
             </ul>
             <div className="flex space-x-6">
-              {/* <a href="/auth/login" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
+              <a
+                href="/auth/login"
+                className="text-[#F9FBFD] py-2 px-3 border border-red-500"
+              >
                 Sign In
               </a>
-              <a href="#" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
+              <a
+                href="#"
+                className="text-[#F9FBFD] py-2 px-3 border border-red-500"
+              >
                 Sign Up
               </a>
-              <a href="/auth/logout" className="text-[#F9FBFD] py-2 px-3 border rounded-md">
+              {/* <a href="/auth/logout" className="text-[#F9FBFD] py-2 px-3 border border-red-500">
                 Sign Out
               </a> */}
-              <ModeToggle />
+              <div className="border border-red-500">
+                <ModeToggle />
+              </div>
             </div>
           </div>
         )}
