@@ -1,35 +1,43 @@
 "use client";
 
+import moment from "moment";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Form } from "@/components/ui/form";
-
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+} from "@/components/ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   emailAddress: z.string().email(),
+  vizName: z.string().min(3),
+  vizMessage: z.string().min(10),
+  client_date_time: z.string(),
 });
 
-const ContactUsSection = () => {
+export default function ContactUsSection() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       emailAddress: "",
+      vizName: "",
+      vizMessage: "",
+      client_date_time: "", // https://momentjs.com/   https://www.youtube.com/watch?v=SrzvESs6N0M
     },
   });
 
-  const handleSubmit = () => {};
+  const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    values.client_date_time = moment().format();
+    console.log({ values });
+  };
 
   return (
     <div className="flex flex-row w-full space-x-2 min-h-fit">
@@ -52,8 +60,28 @@ const ContactUsSection = () => {
           >
             <FormField
               control={form.control}
+              name="vizName"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Full name with salutation</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Mr. Anderson Smith"
+                        type="text"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+
+            <FormField
+              control={form.control}
               name="emailAddress"
-              render={(field) => {
+              render={({ field }) => {
                 return (
                   <FormItem>
                     <FormLabel>Email Address</FormLabel>
@@ -69,12 +97,30 @@ const ContactUsSection = () => {
                 );
               }}
             />
+
+            <FormField
+              control={form.control}
+              name="vizMessage"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Your message</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="I would like to know..."
+                        rows={4}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
             <Button type="submit">Submit</Button>
           </form>
         </Form>
       </div>
     </div>
   );
-};
-
-export default ContactUsSection;
+}
