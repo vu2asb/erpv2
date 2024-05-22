@@ -17,10 +17,10 @@ import { Button } from "./ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  emailAddress: z.string().email(),
-  vizName: z.string().min(3),
-  vizMessage: z.string().min(10),
-  client_date_time: z.string(),
+  emailAddress: z.string().trim().email(),
+  vizName: z.string().trim().min(3),
+  vizMessage: z.string().trim().min(10),
+  client_date_time: z.string().trim(),
 });
 
 export default function ContactUsSection() {
@@ -117,7 +117,7 @@ export default function ContactUsSection() {
                 );
               }}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" variant="custom">Submit</Button>
           </form>
         </Form>
       </div>
