@@ -2,6 +2,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ContactUsSection from "@/components/ContactUsSection";
 
+
 const ContactUs = () => {
   return (
     <>

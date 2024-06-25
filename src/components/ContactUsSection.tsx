@@ -36,8 +36,34 @@ export default function ContactUsSection() {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     values.client_date_time = moment().format();
-    console.log({ values });
+    // console.log({ values });
+    // const tid = '101';
+    const tname = values.vizName;
+    const temail = values.emailAddress;
+    const tstamp = values.client_date_time;
+    const tmessage = values.vizMessage;
+    apiIf(tname, temail, tstamp, tmessage);
   };
+
+  async function apiIf(tname: string, temail: string, tstamp: string, tmessage: string) {
+    console.log('CL-500 series Name: '+tname+', Time Stamp: '+tstamp+', Message: '+tmessage+'...');
+
+    try{
+      const response = await fetch('http://localhost:3000/api/persist-contact-form-data', {
+        method: 'POST',
+        body: JSON.stringify({tname, temail, tstamp, tmessage}),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+      })
+    }
+    catch{
+
+    }
+
+
+
+  }
 
   return (
     <div className="flex flex-row w-full space-x-2 min-h-fit">
@@ -117,7 +143,9 @@ export default function ContactUsSection() {
                 );
               }}
             />
-            <Button type="submit" variant="custom">Submit</Button>
+            <Button type="submit" variant="custom">
+              Submit
+            </Button>
           </form>
         </Form>
       </div>
