@@ -1,4 +1,4 @@
-import {pool} from "@/app/lib/db";
+import {pool} from "./db";
 
 export default async function dbConnect(){
     await pool.connect((err, client, release)=>{

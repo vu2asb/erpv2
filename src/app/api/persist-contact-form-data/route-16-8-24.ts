@@ -29,7 +29,7 @@ export async function POST(req: any, res: any) {
       status: 200,
     });
   } catch {
-    return new Response("DB error while trying to insert record", {
+    return new Response("DB ERROR WHILE ADDING", {
       status: 500,
     });
   }

@@ -1,7 +1,7 @@
 // db.js
 import { Pool } from "pg";
 
-  conn = new Pool({
+  export const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
@@ -9,7 +9,6 @@ import { Pool } from "pg";
     database: process.env.DB_NAME,
   });
   
-export default conn ;
 
 // Kindly refer to .env.local file
 // # DB_HOST=aws-0-ap-southeast-1.pooler.supabase.com
