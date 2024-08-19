@@ -8,6 +8,24 @@ export default function Page() {
   const [message, setMessage] = useState("Initial");
   const [error, setError] = useState<string | null>(null);
 
+  // creating a dummy form fields
+  const fName = "Daisy";
+  const lName = "Rocks";
+  const email = "daisy@rocks.net";
+  const regTime = "Mon";
+  const webinarRef = "WEB-101";
+  const webinarNote = "The first of its kind webinar, join WEB-101 now";
+  
+  // creating a dummy FormData object
+  const myFormData = new FormData();
+  myFormData.append("day1", fName);
+  myFormData.append("day2", lName);
+  myFormData.append("day3", email);
+  myFormData.append("day4", regTime);
+  myFormData.append("day5", webinarRef);
+  myFormData.append("day6", webinarNote);
+
+
   //   This line of code defines an asynchronous function named onSubmit
   //   that will be called when a form is submitted. The function receives
   //   an event object as a parameter, which contains information
@@ -24,7 +42,7 @@ export default function Page() {
       const response = await fetch("http://localhost:3000/api/api-poc-1",
         {
           method: "POST",
-          body: formData,
+          body: formData, 
         }
       );
       if (!response.ok) {
@@ -50,12 +68,17 @@ export default function Page() {
       If there's an error, the component will render a red div with 
       the error message; otherwise, it won't show anything. */}
 
-      <form onSubmit={onSubmit}>
-        <input type="text" name="fName" placeholder="First" />
-        <input type="text" name="lName" placeholder="Last" />
+      <form onSubmit={onSubmit} className="flex-col">
+        <input type="text" name="fName" placeholder="First Name" />
+        <input type="text" name="lName" placeholder="Last Name" />
         <input type="text" name="email" placeholder="Email" />
+        <input type="text" name="regTime" placeholder="2024-08-17 10:24:08.287524" />
+        <input type="text" name="webinarRef" placeholder="WEB-0001" />
+        <input type="text" name="webinarNote" placeholder="Note on webinar WEB-0001..." />
         <button type="submit">Submit</button>
       </form>
     </div>
   );
 }
+
+
