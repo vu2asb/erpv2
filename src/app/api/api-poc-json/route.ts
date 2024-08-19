@@ -1,8 +1,14 @@
+/* 
+String for API testing: {"fName":"John", "lName":"Doe", "email":"john.doe@gmail.com", 
+"regTime": "2024-08-19T12:41:10+05:30", "webinarRef": "Webinar ID: 101", "webinarNote": "The webinar note"}
+*/
+
 import { pool } from "@/lib/db";
 import dbConnect from "@/lib/dbconnect";
 import { NextRequest, NextResponse } from "next/server";
 import { z, ZodError } from "zod";
 import { log } from "console";
+import moment from "moment";
 
 dbConnect();
 
@@ -63,6 +69,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
   const stringifyData = JSON.stringify(data);
   const obj = JSON.parse(stringifyData);
+  const regTimeStamp = moment().format();
 
   console.log(
     "First Name: " +
@@ -72,7 +79,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       ", email: " +
       obj.email +
       ", Registeration Timestamp: " +
-      obj.regTime +
+      regTimeStamp +
       ", Webinar Reference: " +
       obj.webinarRef +
       "Weninar Notes: " +
@@ -102,7 +109,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         applicant.first_name,
         applicant.last_name,
         applicant.appl_email,
-        applicant.reg_time,
+        regTimeStamp,
         applicant.webinar_ref,
         applicant.webinar_note
       ]);

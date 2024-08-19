@@ -3,6 +3,7 @@ import dbConnect from "@/lib/dbconnect";
 import { z, ZodError } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { log } from "console";
+import moment from "moment";
 
 const userSchema = z.object({
   first_name: z
@@ -67,6 +68,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const webinarID = data.get("webinarRef");
   const webinarNote = data.get("webinarNote");
 
+  const regTimeStamp = moment().format();
+
   // console.log('API processing!');
 
   console.log(
@@ -77,7 +80,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       ", Email: " +
       email +
       ", Time: " +
-      regTime +
+      regTimeStamp +
       ", Webinar ID: " +
       webinarID +
       ", Webinar Notes: " +
@@ -103,7 +106,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
       const queryText =
         "INSERT INTO webinar_reg (first, last, email, reg_time, webinar_ref, webinar_note) VALUES ($1, $2, $3, $4, $5, $6)";
       const resultSet = await pool.query(queryText, [
-
+        applicant.first_name,
+        applicant.last_name,
+        applicant.appl_email,
+        regTimeStamp,
+        applicant.webinar_ref,
+        applicant.webinar_note
       ]);
 
       console.log(resultSet);
