@@ -36,7 +36,7 @@ const userSchema = z.object({
     })
     .trim()
     .min(20, {
-      message: "Registration timestamp should be atleast 2 charecters",
+      message: "Registration timestamp should be atleast 20 charecters",
     })
     .max(30, {
       message: "Registration timestamp should not be longer than 30 charecters",
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       ""
   );
 
-  console.log("JSON payload sent from form to API:: " + stringifyData + "");
+  console.log("JSON payload sent from the registeration form to API:: " + stringifyData + "");
   // add code here to send and save data to database
 
   try {
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         appl_email: obj.email,
         reg_time: obj.regTime,
         webinar_ref: obj.webinarRef,
-        webinar_note: obj.webinarNote,
+        webinar_note: obj.webinarNote
       });
       console.log("Looks like no Zod parse error");
     try {
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
   } catch(error) {
     if (error instanceof z.ZodError) {
-      console.log("ZOD Error");
+      console.log("ZOD Error :"+error+"");
       return new Response("ZOD Error", {
         status: 500,
       });

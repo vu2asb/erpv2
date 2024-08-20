@@ -12,7 +12,7 @@ export async function POST(req: any, res: any) {
 
   const obj = JSON.parse(stringifyData);
 
-  console.log('Name: '+ obj.tname+ '.............');
+  console.log('Name: '+ obj.tFname+ '.............');
 
   console.log("CL-PER-100:: POST data sent as json:: " + stringifyData + "");
   // add code here to send and save data to database
@@ -20,10 +20,11 @@ export async function POST(req: any, res: any) {
   try {
     // "INSERT INTO contact_us (name, email, client_date_time_tz, message) VALUES ('"+obj.tname+"', '"+obj.temail+"', '"+obj.tstamp+"', '"+obj.tmessage+"')";
     const queryText =
-      "INSERT INTO contact_us (name, email, client_date_time_tz, message) VALUES ($1, $2, $3, $4)";
+      "INSERT INTO contact_us (first_name, last_name, email, client_date_time_tz, message) VALUES ($1, $2, $3, $4, $5)";
 
 	        const result = await pool.query(queryText, [
-            obj.tname,
+            obj.tFname,
+            obj.tLname,
             obj.temail,
             obj.tstamp,
             obj.tmessage
