@@ -85,7 +85,7 @@ export default function ContactUsSection() {
 
   return (
     <div className="sm: flex flex-col w-full m-2 min-h-fit md:flex-row">
-            <div className="border border-white w-[80%] m-5 p-10 bg-gradient-to-r from-violet-800 to-fuchsia-800">
+            <div className="border border-white w-[80%] m-1 p-10 bg-gradient-to-r from-violet-800 to-fuchsia-800">
 
         <div className="text-white mt-0 z-10 ">
           <div className="mt-2 w-40">
@@ -108,7 +108,7 @@ export default function ContactUsSection() {
         </div>
       </div>
 
-      <div className="border border-white w-[80%] m-5 p-10">
+      <div className="border border-white w-[80%] m-1 p-10">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
