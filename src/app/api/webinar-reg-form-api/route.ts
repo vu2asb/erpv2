@@ -87,19 +87,23 @@ export async function POST(req: NextRequest, res: NextResponse) {
       ""
   );
 
-  console.log("JSON payload sent from the registeration form to API:: " + stringifyData + "");
+  console.log(
+    "JSON payload sent from the registeration form to API:: " +
+      stringifyData +
+      ""
+  );
   // add code here to send and save data to database
 
   try {
     const applicant = userSchema.parse({
-        first_name: obj.fName,
-        last_name: obj.lName,
-        appl_email: obj.email,
-        reg_time: obj.regTime,
-        webinar_ref: obj.webinarRef,
-        webinar_note: obj.webinarNote
-      });
-      console.log("Looks like no Zod parse error");
+      first_name: obj.fName,
+      last_name: obj.lName,
+      appl_email: obj.email,
+      reg_time: obj.regTime,
+      webinar_ref: obj.webinarRef,
+      webinar_note: obj.webinarNote,
+    });
+    console.log("Looks like no Zod parse error");
     try {
       // "INSERT INTO contact_us (name, email, client_date_time_tz, message) VALUES ('"+obj.tname+"', '"+obj.temail+"', '"+obj.tstamp+"', '"+obj.tmessage+"')";
       const queryText =
@@ -111,7 +115,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         applicant.appl_email,
         regTimeStamp,
         applicant.webinar_ref,
-        applicant.webinar_note
+        applicant.webinar_note,
       ]);
 
       // const result = await pool.query(query);
@@ -127,9 +131,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
         status: 500,
       });
     }
-  } catch(error) {
+  } catch (error) {
     if (error instanceof z.ZodError) {
-      console.log("ZOD Error :"+error+"");
+      console.log("ZOD Error :" + error + "");
       return new Response("ZOD Error", {
         status: 500,
       });

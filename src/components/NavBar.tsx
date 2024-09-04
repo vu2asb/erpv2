@@ -22,19 +22,19 @@ const NavBar = () => {
             <div className="flex items-center flex-shrink-0">
               <div className="mx-4">
                 <Image
-                  src="../assets/Logo.svg"
+                  src="../assets/NewLogo.svg"
                   alt="Logo image"
-                  className="dark:invert"
-                  width={24}
-                  height={24}
+                  // className="dark:invert"
+                  width={50}
+                  height={50}
                   priority
                 />
               </div>
-              <span className="text-xl tracking-tight">Logo Text</span>
+              <span className="text-[18px] tracking-tight text-[#c9b7a3] md:text-xl">Ashok Singh - Software Business Strategist</span>
             </div>
           </a>
 
-          <ul className="hidden lg:flex ml-0 space-x-12">
+          <ul className="hidden lg:flex ml-0 space-x-12 text-[#c9b7a3]">
             {" "}
             {/*  ml-14  */}
             {navItems.map((item, index) => (
@@ -44,12 +44,12 @@ const NavBar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center space-x-8 items-center">
-            <a href="/auth/login" className="py-2 px-4 border border-red-500">
+            {/* <a href="/auth/login" className="py-2 px-4 border border-red-500">
               Sign In
             </a>
             <a href="#" className="py-2 px-4 border border-red-500">
               Sign Up
-            </a>
+            </a> */}
             {/* <a href="/auth/logout" className="py-2 px-4 border border-red-500">
               Sign Out
             </a> */}
@@ -65,7 +65,7 @@ const NavBar = () => {
         </div>
         {mobileDrawerOpen && (
           <div className="fixed right-02 z-0 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center text-center lg:hidden">
-            <ul className="text-white">
+            <ul className="text-[#c9b7a3]">
               {navItems.map((item, index) => (
                 <li key={index} className="py-4">
                   <a href={item.href}>{item.label}</a>
