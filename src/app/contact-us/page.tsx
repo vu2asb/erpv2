@@ -7,7 +7,7 @@ const ContactUs = () => {
   return (
     <>
       <NavBar />
-      <div className="min-h-svh max-w-7xl mx-auto pt-5 px-6">
+      <div className="min-h-svh max-w-7xl mx-auto pt-0 px-6 flex items-center justify-center">
         <ContactUsSection />
       </div>
       <Footer />

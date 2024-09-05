@@ -56,7 +56,9 @@ export default function ContactUsSection() {
     temail: string,
     tstamp: string,
     tmessage: string
-  ) {
+  ) 
+
+{
     console.log(
       "CL-500 series First Name: " +
         tFname +
@@ -125,8 +127,8 @@ export default function ContactUsSection() {
   }
 
   return (
-    <div className="sm: flex flex-col w-full m-2 min-h-fit md:flex-row">
-      <div className="border border-white w-[80%] m-1 p-10 bg-gradient-to-r from-violet-950 to-fuchsia-1000">
+    <div className="sm: flex flex-col justify-center items-center w-full m-2 min-h-fit md:flex-row ">
+      <div className="border-2 border-white w-[80%] m-1 p-10 bg-gradient-to-r from-violet-950 to-fuchsia-1000 md:h-[540px]">
         <div className="text-white mt-0 z-10 ">
           <div className="mt-2 w-40">
             <hr className="ml-4 border-primary border-2"></hr>
@@ -162,7 +164,7 @@ export default function ContactUsSection() {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Anderson" type="text" {...field} />
+                      <Input className="bg-slate-100 text-slate-900" placeholder="Anderson" type="text" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -178,7 +180,7 @@ export default function ContactUsSection() {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Smith" type="text" {...field} />
+                      <Input className="bg-slate-100 text-slate-900" placeholder="Smith" type="text" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -195,6 +197,7 @@ export default function ContactUsSection() {
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
                       <Input
+                      className="bg-slate-100 text-slate-900"
                         placeholder="Email address"
                         type="email"
                         {...field}
@@ -215,6 +218,7 @@ export default function ContactUsSection() {
                     <FormLabel>Your message</FormLabel>
                     <FormControl>
                       <Textarea
+                      className="bg-slate-100 text-slate-900"
                         placeholder="I would like to know..."
                         rows={4}
                         {...field}
@@ -225,7 +229,7 @@ export default function ContactUsSection() {
                 );
               }}
             />
-            <Button type="submit" variant="custom">
+            <Button className="mt-6" type="submit">
               Submit
             </Button>
           </form>
