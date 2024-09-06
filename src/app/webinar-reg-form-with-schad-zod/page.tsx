@@ -15,8 +15,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Half1Icon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import SpinnerPulse from "@/components/ui/spinnerPulse"; // import the spinner component
+import { useState } from "react"; // we will need this to mantain the loading state
 
 const formSchema = z.object({
   sfName: z
@@ -42,16 +45,23 @@ const formSchema = z.object({
 
 // const page = () => {
 export default function WebRegister() {
+  let [users, setUsers] = useState([null]);
+  let [loading, setLoading] = useState(false);
+
+  const wait = async (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
   const searchParams = useSearchParams();
   const webRef = searchParams.get("wref");
   const webNote = searchParams.get("wnote");
-  console.log(
-    "Parameters passed: Webinar Reference: " +
-      webRef +
-      ", Webinar Note: " +
-      webNote +
-      ""
-  );
+  // console.log(
+  //   "Parameters passed: Webinar Reference: " +
+  //     webRef +
+  //     ", Webinar Note: " +
+  //     webNote +
+  //     ""
+  // );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,35 +74,139 @@ export default function WebRegister() {
       swebinarNote: "",
     },
   });
-  
-  // async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-  //   event.preventDefault();
-  // const handleSubmit = (values: z.infer<typeof formSchema>) => {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    // console.log("Submit button clicked ...!");
 
-    console.log("Submit button clicked ...!");
     values.stimeStamp = moment().format();
-    console.log({ values });
+    // console.log({ values });
     values.swebinarRef = "W-101 Default Reference ...";
     values.swebinarNote = "W-101 Default Note ...";
-    console.log(
-      "Submit button clicked. First Name: " +
-        values.sfName +
-        ", Last Name: " +
-        values.slName +
-        ", email: " +
-        values.semail +
-        ", Time Stamp: " +
-        values.stimeStamp +
-        ", Webinar Reference: " +
-        webRef +
-        " and Webinar Note: " +
-        webNote +
-        ""
-    );
-  };
+    // console.log(
+    //   "Submit button clicked. First Name: " +
+    //     values.sfName +
+    //     ", Last Name: " +
+    //     values.slName +
+    //     ", email: " +
+    //     values.semail +
+    //     ", Time Stamp: " +
+    //     values.stimeStamp +
+    //     ", Webinar Reference: " +
+    //     webRef +
+    //     " and Webinar Note: " +
+    //     webNote +
+    //     ""
+    // );
 
+    var fName = values.sfName;
+    var lName = values.slName;
+    var email = values.semail;
+    var regTime = values.stimeStamp;
+    var webinarRef = webRef;
+    var webinarNote = webNote;
+
+    const fetchData = async () => {
+      setLoading(true); // Set loading to true to start showing the spinner
+      const response = await fetch(
+        "http://localhost:3000/api/webinar-reg-form-api",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            fName,
+            lName,
+            email,
+            regTime,
+            webinarRef,
+            webinarNote,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.status != 200) {
+        // console.log("New Func:: API call failed");
+        // alert("New Func:: API call failed");
+        // console.log("Response status is not 200");
+        Swal.fire({
+          title: "Oops...",
+          imageUrl: "https://unsplash.it/450/250",
+          imageWidth: 450,
+          imageHeight: 250,
+          imageAlt: "Custom image",
+          html: `
+          <h3 style="font-size: 1.5em; margin-bottom: 8px;">Sorry!</h3>
+          <h4 style="font-size: 1.3em; margin-bottom: 6px;">Could not process your request</h4>
+          <h5 style="font-size: 1em; margin-bottom: 8px;">Please try after some time</h5>
+          <h6 style="font-size: 0.8em; margin-bottom: 5px; color: green;">[MA-001]</h6>
+            `,
+          footer:
+            '<a style="color: blue;" href="#">Why do I have this issue?</a>',
+          confirmButtonText: "Continue",
+        });
+        //---------swal ends----------
+        // Need to reload the page now
+        await wait(10000);
+        window.location.reload(); // use this for instant reload
+        return;
+      }
+      if (response.status == 200) {
+        // console.log("New Func:: API call success");
+        // alert("New Func:: API call success");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Registration Done!",
+          showConfirmButton: false,
+        });
+        // Need to reload the page now
+        // await wait(3000);
+        // window.location.reload();
+        // return;
+        // Replace 2000 with the desired delay in milliseconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        // window.location.reload(); // use this for instant reload
+      }
+    };
+
+    fetchData()
+      .then((data) => {
+        // console.log(data);
+      })
+      .catch((err) => {
+        // console.log("New Func:: API call error");
+        // console.error(err);
+        // alert("API fetch catch block error");
+
+        Swal.fire({
+          title: "Oops...",
+          imageUrl: "https://unsplash.it/450/250",
+          imageWidth: 450,
+          imageHeight: 250,
+          imageAlt: "Custom image",
+          html: `
+            <h3 style="font-size: 1.5em; margin-bottom: 8px;">Sorry!</h3>
+            <h4 style="font-size: 1.3em; margin-bottom: 6px;">Could not process your request</h4>
+            <h5 style="font-size: 1em; margin-bottom: 8px;">Please try after some time</h5>
+            <h6 style="font-size: 0.8em; margin-bottom: 5px; color: green;">[MA-002]</h6>
+              `,
+          footer:
+            '<a style="color: blue;" href="#">Why do I have this issue?</a>',
+          confirmButtonText: "Continue",
+        });
+        //---------swal ends----------
+
+        // Need to reload the page now
+        // Replace 2000 with the desired delay in milliseconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 10000);
+        // window.location.reload(); // use this for instant reload
+      });
+  };
 
   return (
     <div className="mx-auto min-h-svh flex items-center justify-center">
@@ -195,6 +309,12 @@ export default function WebRegister() {
               </Button>
             </form>
           </Form>
+          {/* Check whether API is loading */}
+          {loading && (
+            <div className="bg-slate-700 rounded p-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <SpinnerPulse />
+            </div>
+          )}
         </div>
       </div>
     </div>
