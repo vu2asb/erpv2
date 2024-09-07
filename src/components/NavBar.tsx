@@ -30,7 +30,7 @@ const NavBar = () => {
                   priority
                 />
               </div>
-              <span className="text-[18px] tracking-tight text-[#c9b7a3] md:text-xl">Ashok Singh - Software Business Strategist</span>
+              <span className="text-[17px] tracking-tight text-[#c9b7a3] md:text-xl">Ashok Singh - Software Business Strategist</span>
             </div>
           </a>
 

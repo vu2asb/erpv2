@@ -32,8 +32,8 @@ const Services = () => {
               <p>{item.info}</p>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <a href="/">
-                <Button variant="secondary">Read more...</Button>
+              <a href="/contact-us">
+                <Button variant="secondary">Know more...</Button>
               </a>
             </CardFooter>
           </div>

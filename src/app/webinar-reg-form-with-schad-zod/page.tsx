@@ -164,7 +164,7 @@ export default function WebRegister() {
         // await wait(3000);
         // window.location.reload();
         // return;
-        // Replace 2000 with the desired delay in milliseconds
+        // Replace 3000 with the desired delay in milliseconds
         setTimeout(() => {
           window.location.reload();
         }, 3000);
@@ -172,6 +172,8 @@ export default function WebRegister() {
       }
     };
 
+
+    setLoading(false); // Set loading to false to stop showing the spinner
     fetchData()
       .then((data) => {
         // console.log(data);
@@ -210,16 +212,16 @@ export default function WebRegister() {
 
   return (
     <div className="mx-auto min-h-svh flex items-center justify-center">
-      <div className="border border-slate-700 w-[100%] flex flex-col items-center justify-center lg:flex-row">
+      <div className="border border-slate-700 w-[60%] flex flex-col items-center justify-center lg:flex-row">
         {/* Left side div*/}
-        <div className="m-0 border border-slate-700 w-[100%] relative bg-cover bg-center lg:w-[60%]">
+        <div className="m-0 border border-slate-700 w-[100%] relative bg-cover bg-center lg:w-[65%]">
           <Image
             src="/assets/webinar-reg-small.jpg"
             alt="Picture for the Webinar registeration form"
             width={900}
             height={600}
             layout="responsive"
-            objectFit="contain" // or 'cover' depending on your needs
+            objectFit="cover" // or 'cover' depending on your needs
             className="sm:min-h-full"
           />
           {/* <h1 className="absolute top-10 left-10 text-white text-xl font-bold">
@@ -237,78 +239,90 @@ export default function WebRegister() {
         </div>
 
         {/* Right side div */}
-        <div className="w-[100%] p-5 lg:w-[40%]">
-          <Form {...form}>
-            <h1 className="my-2 text-2xl text-primary">Register NOW!</h1>
-            <form
-              onSubmit={form.handleSubmit(handleSubmit)}
-              className="w-[100%] flex flex-col justify-center py-2"
-            >
-              <FormField
-                control={form.control}
-                name="sfName"
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="bg-slate-100 text-slate-900"
-                          placeholder="Andrew"
-                          type="text"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  );
-                }}
-              />
-              <FormField
-                control={form.control}
-                name="slName"
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="bg-slate-100 text-slate-900"
-                          placeholder="Sharma"
-                          type="text"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  );
-                }}
-              />
-              <FormField
-                control={form.control}
-                name="semail"
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormLabel>Email Address</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="bg-slate-100 text-slate-900"
-                          placeholder="Email Address"
-                          type="email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  );
-                }}
-              />
-              <Button className="mt-6" type="submit">
-                Submit
-              </Button>
-            </form>
-          </Form>
+        <div className="w-[100%] p-5 lg:w-[35%] m-10 lg:m-0">
+          <div className="flex justify-center items-center mt-0 pt-0 py-0 lg:mb-10">
+            <Image
+              src="../assets/NewLogo.svg"
+              alt="Logo image"
+              // className="dark:invert"
+              width={100}
+              height={100}
+              priority
+            />
+          </div>
+          <div className="">
+            <Form {...form}>
+              <h1 className="my-2 text-2xl text-primary flex justify-center">Register NOW!</h1>
+              <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="w-[100%] flex flex-col justify-center py-2"
+              >
+                <FormField
+                  control={form.control}
+                  name="sfName"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormLabel>First Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            className="bg-slate-100 text-slate-900 text-xl"
+                            placeholder="Andrew"
+                            type="text"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                <FormField
+                  control={form.control}
+                  name="slName"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            className="bg-slate-100 text-slate-900 text-xl"
+                            placeholder="Sharma"
+                            type="text"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                <FormField
+                  control={form.control}
+                  name="semail"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                          <Input
+                            className="bg-slate-100 text-slate-900 text-xl"
+                            placeholder="Email Address"
+                            type="email"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                <Button className="mt-6" type="submit">
+                  Submit
+                </Button>
+              </form>
+            </Form>
+          </div>
           {/* Check whether API is loading */}
           {loading && (
             <div className="bg-slate-700 rounded p-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

@@ -17,6 +17,8 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Swal from "sweetalert2";
+import SpinnerPulse from "@/components/ui/spinnerPulse"; // import the spinner component
+import { useState } from "react"; // we will need this to mantain the loading state
 
 const formSchema = z.object({
   emailAddress: z.string().trim().email(),
@@ -27,6 +29,12 @@ const formSchema = z.object({
 });
 
 export default function ContactUsSection() {
+  let [users, setUsers] = useState([null]);
+  let [loading, setLoading] = useState(false);
+
+  const wait = async (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,24 +64,23 @@ export default function ContactUsSection() {
     temail: string,
     tstamp: string,
     tmessage: string
-  ) 
-
-{
-    console.log(
-      "CL-500 series First Name: " +
-        tFname +
-        ", Last Name: " +
-        tLname +
-        ", Time Stamp: " +
-        tstamp +
-        ", Message: " +
-        tmessage +
-        "..."
-    );
+  ) {
+    // console.log(
+    //   "CL-500 series First Name: " +
+    //     tFname +
+    //     ", Last Name: " +
+    //     tLname +
+    //     ", Time Stamp: " +
+    //     tstamp +
+    //     ", Message: " +
+    //     tmessage +
+    //     "..."
+    // );
 
     try {
+      setLoading(true); // Set loading to true to start showing the spinner
       const response = await fetch(
-        "http://localhost:3000/api/persist-contact-form-data",
+        "http://localhost:3000/api/persist-contact-form-datax",
         {
           method: "POST",
           body: JSON.stringify({ tFname, tLname, temail, tstamp, tmessage }),
@@ -83,9 +90,21 @@ export default function ContactUsSection() {
         }
       );
       if (response.ok) {
-        console.log("Api fetched okay");
+        // console.log("Api fetched okay");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Request Acknowledged!",
+          showConfirmButton: false,
+        });
+        // Need to reload the page now
+        // Replace 2000 with the desired delay in milliseconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        // window.location.reload(); // use this for instant reload
       } else {
-        console.log("Api fetch failed");
+        // console.log("Api fetch failed");
         Swal.fire({
           title: "Oops...",
           imageUrl: "https://unsplash.it/450/250",
@@ -102,10 +121,13 @@ export default function ContactUsSection() {
             '<a style="color: blue;" href="#">Why do I have this issue?</a>',
           confirmButtonText: "Continue",
         });
-        <Link href="/contact-us"></Link>;
+        // Replace 8000 with the desired delay in milliseconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 8000);
       }
     } catch {
-      console.log("Error:: Could not fetch the api");
+      // console.log("Error:: Could not fetch the api");
       Swal.fire({
         title: "Oops...",
         imageUrl: "https://unsplash.it/450/250",
@@ -128,7 +150,7 @@ export default function ContactUsSection() {
 
   return (
     <div className="sm: flex flex-col justify-center items-center w-full m-2 min-h-fit md:flex-row ">
-      <div className="border-2 border-white w-[80%] m-1 p-10 bg-gradient-to-r from-violet-950 to-fuchsia-1000 md:h-[540px]">
+      <div className="border-2 border-slate-700 w-[50%] m-1 p-10 bg-gradient-to-r from-violet-950 to-fuchsia-950 md:h-[540px]">
         <div className="text-white mt-0 z-10 ">
           <div className="mt-2 w-40">
             <hr className="ml-4 border-primary border-2"></hr>
@@ -145,16 +167,18 @@ export default function ContactUsSection() {
             <br />
             <h1 className="text-[20px] text-[#e75151]">Office Hours</h1>
             <h3 className="text-[#e75151]">Time: 9 AM to 6 PM</h3>
-            <h3 className="text-[#e75151]">Indian Standard Time (UTC+5:30) Monday through Saturday</h3>
+            <h3 className="text-[#e75151]">
+              Indian Standard Time (UTC+5:30) Monday through Saturday
+            </h3>
           </div>
         </div>
       </div>
 
-      <div className="border border-white w-[80%] m-1 p-10">
+      <div className="border border-slate-700 w-[50%] m-1 p-10 md:h-[540px]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="max-w-md w-full flex flex-col gap-4"
+            className="w-full flex flex-col gap-4 justify-center"
           >
             <FormField
               control={form.control}
@@ -164,7 +188,12 @@ export default function ContactUsSection() {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input className="bg-slate-100 text-slate-900" placeholder="Anderson" type="text" {...field} />
+                      <Input
+                        className="bg-slate-100 text-slate-950 text-xl"
+                        placeholder="Anderson"
+                        type="text"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -180,7 +209,12 @@ export default function ContactUsSection() {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input className="bg-slate-100 text-slate-900" placeholder="Smith" type="text" {...field} />
+                      <Input
+                        className="bg-slate-100 text-slate-950 text-xl"
+                        placeholder="Smith"
+                        type="text"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -197,7 +231,7 @@ export default function ContactUsSection() {
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
                       <Input
-                      className="bg-slate-100 text-slate-900"
+                        className="bg-slate-100 text-slate-950 text-xl"
                         placeholder="Email address"
                         type="email"
                         {...field}
@@ -218,7 +252,7 @@ export default function ContactUsSection() {
                     <FormLabel>Your message</FormLabel>
                     <FormControl>
                       <Textarea
-                      className="bg-slate-100 text-slate-900"
+                        className="bg-slate-100 text-slate-950 text-xl"
                         placeholder="I would like to know..."
                         rows={4}
                         {...field}

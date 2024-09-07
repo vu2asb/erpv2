@@ -38,6 +38,7 @@ const Emailer = () => {
           cache: "no-store", // This line added: Next.js 13 Caching and Revalidation
           //https://www.youtube.com/watch?v=ztswJg7MYCs
         }
+        
       );
       console.log(
         "API Response status code: " +
