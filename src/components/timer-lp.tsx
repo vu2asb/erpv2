@@ -37,11 +37,6 @@ const getTimeLeft = (expiry: string): TimeCount => {
     };
   }
 
-  //   days = Math.floor(difference / (1000 * 60 * 60 * 24)).toString();
-  //   hours = Math.floor((difference / (1000 * 60 * 60)) % 24).toString();
-  //   minutes = Math.floor((difference / (1000 * 60)) % 60).toString();
-  //   seconds = Math.floor((difference / 1000) % 60).toString();
-
   const dys = Math.floor(difference / (1000 * 60 * 60 * 24));
   const hrs = Math.floor((difference / (1000 * 60 * 60)) % 24);
   const mnt = Math.floor((difference / (1000 * 60)) % 60);
@@ -72,17 +67,6 @@ const TimerLP = ({ launchDate }: { launchDate: string }) => {
   return (
     <div>
       <div className="flex flex-row">
-        <div>
-          <CiCalendar size={100} />
-        </div>
-        {/* <h1 className="text-2xl">
-            The middle part of the landing page to be used to place the timer.
-          </h1> */}
-        <div className="flex flex-col justify-items-center items-center my-auto mr-20 ml-20">
-        <span className="text-[20px] mb-3">Webinar Begins</span>
-          <span className="text-[14px]">September, 15th, 2024</span>
-          <span className="text-[20px]">4:54 PM</span>
-        </div>
 
         <span className="flex flex-col justify-center items-center bg-secondary text-primary text-5xl rounded-2xl w-36 m-1.5 py-4">
           {timeLeft.days}
