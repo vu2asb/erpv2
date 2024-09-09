@@ -1,7 +1,22 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import TimerLP from "@/components/timer-lp";
 import { CiCalendar } from "react-icons/ci";
+
+// NOTE:
+// Set the webinar reference and webinar note that 
+// will be sent to the webinar registration form as URP params
+// E.g.
+// const webinar_ref = "Web Ref-101";
+// const webinar_note = "Note for Web Ref-101";
+const webinar_ref = "Web Ref-101";
+const webinar_note = "Note for Web Ref-101";
+
+// Set the duration of the counter here in minutes e.g. 10
+// E.g. 
+// const freqMins = 10;
+const freqMins = 10;
 
 const monthNames = [
   "January",
@@ -20,10 +35,6 @@ const monthNames = [
 const separator = "   "; // Adjust the number of spaces as needed
 
 const LandingPage2 = () => {
-  // NOTE:
-  // Set the duration of the counter here in minutes e.g. 10
-  const freqMins = 10;
-
   const nowTime = new Date().getTime();
   const now = new Date(nowTime);
 
@@ -52,7 +63,7 @@ const LandingPage2 = () => {
   const tSec = now.getSeconds();
 
   let ampm = "";
-  if (tHour >= 12) {
+  if (tHour >= 13) {
     ampm = "PM";
     tHour = tHour - 12;
   } else {
@@ -93,6 +104,20 @@ const LandingPage2 = () => {
       <div className="px-4 w-full flex flex-col justify-center items-center">
         <section className="m-20 p-20">
           <h1 className="text-2xl">The upper part of the landing page.</h1>
+          <Button
+            onClick={() => {
+              console.log("Button Clicked ...");
+              const url =
+                "http://localhost:3000/webinar-reg-form-with-schad-zod?wref=" +
+                webinar_ref +
+                "&wnote=" +
+                webinar_note +
+                "";
+              window.location.href = url;
+            }}
+          >
+            Click me
+          </Button>
         </section>
         <section className="m-10 p-5 flex flex-row">
           <div>
