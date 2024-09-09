@@ -20,7 +20,10 @@ const monthNames = [
 const separator = "   "; // Adjust the number of spaces as needed
 
 const LandingPage2 = () => {
-  const freqMins = 10; // in minutes e.g. 10
+  // NOTE:
+  // Set the duration of the counter here in minutes e.g. 10
+  const freqMins = 10;
+
   const nowTime = new Date().getTime();
   const now = new Date(nowTime);
 
@@ -32,14 +35,14 @@ const LandingPage2 = () => {
   const nmin = now.getMinutes();
   const nseconds = now.getSeconds();
   // Show Now Time
-  console.log("Present Year:", nyear);
-  console.log("Present Month:", nmonth);
-  console.log("Present Day:", nday);
-  console.log("Present Hour:", nhour);
-  console.log("Present Min:", nmin);
-  console.log("Present Sec:", nseconds);
+  // console.log("Present Year:", nyear);
+  // console.log("Present Month:", nmonth);
+  // console.log("Present Day:", nday);
+  // console.log("Present Hour:", nhour);
+  // console.log("Present Min:", nmin);
+  // console.log("Present Sec:", nseconds);
 
-  // Set Target Time by adding latency; value held by variable 'freqMins' in minutes to the current time
+  // Set Target Time by adding latency; value held by variable 'freqMins' above in minutes to the current time
   now.setMinutes(now.getMinutes() + freqMins);
   const tYear = now.getFullYear();
   const tMonth = now.getMonth() + 1;
@@ -57,30 +60,33 @@ const LandingPage2 = () => {
   }
 
   // Show Target Time
-  console.log("Target Year", tYear);
-  console.log("Target Month", tMonth);
-  console.log("Target Day:", tDay);
-  console.log("Target Hour:", tHour);
-  console.log("Target Min:", tMin);
-  console.log("Target Sec:", tSec);
+  // console.log("Target Year", tYear);
+  // console.log("Target Month", tMonth);
+  // console.log("Target Day:", tDay);
+  // console.log("Target Hour:", tHour);
+  // console.log("Target Min:", tMin);
+  // console.log("Target Sec:", tSec);
 
   // const monthIndex = now.getMonth();
   const monthIndex = tMonth;
   const monthName = monthNames[monthIndex - 1];
-  console.log(monthName); // Output: "September"
+  // console.log(monthName); // Output: "September"
 
   const suffixes = ["th", "st", "nd", "rd", "th"];
   // tDay = 20;
   const dayIndex = tDay % 10;
-  const daySuffix = suffixes[dayIndex >= 4 || dayIndex === 0 || (tDay >= 11 && tDay <= 13) ? 0 : dayIndex];
-  // console.log("Suffix: " + daySuffix + "");
+  const daySuffix =
+    suffixes[
+      dayIndex >= 4 || dayIndex === 0 || (tDay >= 11 && tDay <= 13)
+        ? 0
+        : dayIndex
+    ];
 
   const mynow = new Date();
-  now.setMinutes(mynow.getMinutes() + 10);
-  const isoDateString = now.toISOString();
-  console.log("ISO 8601 string:", isoDateString);
+  now.setMinutes(mynow.getMinutes() + freqMins); // The counter loading time is set here
 
-  // tMin = 1
+  const isoDateString = now.toISOString();
+  // console.log("ISO 8601 string:", isoDateString);
 
   return (
     <main className="container mx-auto h-screen flex justify-center items-center">
@@ -98,12 +104,15 @@ const LandingPage2 = () => {
             </span>
             <span className="text-[#c9b7a3] text-[15px]">
               {/* {monthName},{tDay}th,{tYear} */}
-              {monthName}, {separator}{tDay}{daySuffix},{separator}{tYear}
+              {monthName}, {separator}
+              {tDay}
+              {daySuffix},{separator}
+              {tYear}
               {/* September, 15th, 2024 */}
             </span>
             <span className="text-[#c9b7a3] text-[20px]">
               {/* {tHour}:{(tMin < 10) ? `${tMin.toFixed(2)}`: tMin} {ampm} */}
-              {tHour}:{(tMin < 10) ? `0${tMin}`: tMin} {ampm}    
+              {tHour}:{tMin < 10 ? `0${tMin}` : tMin} {ampm}
             </span>
           </div>
           <TimerLP launchDate={isoDateString} />

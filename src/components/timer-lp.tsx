@@ -5,7 +5,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { CiCalendar } from "react-icons/ci";
 
 interface TimeCount {
   days: string;
@@ -14,6 +13,7 @@ interface TimeCount {
   seconds: string;
 }
 
+// let dd = 0; let hh = 0; let mm = 0; let ss = 0;
 const nowTime = new Date().getTime();
 
 // console.log("Present Time is: " + nowTime + ""); // Output: 1694097460000 (example value)
@@ -42,6 +42,12 @@ const getTimeLeft = (expiry: string): TimeCount => {
   const mnt = Math.floor((difference / (1000 * 60)) % 60);
   const snd = Math.floor((difference / 1000) % 60);
 
+
+  // let dd = 0; let hh = 0; let mm = 0; let ss = 0;
+if((dys == 0) && (hrs == 0) && (mnt == 0) && (snd == 0)){
+   window.location.reload(); // use this for instant reload
+}
+
   days = dys < 10 ? `0${dys}` : dys.toString();
   hours = hrs < 10 ? `0${hrs}` : hrs.toString();
   minutes = mnt < 10 ? `0${mnt}` : mnt.toString();
@@ -63,6 +69,7 @@ const TimerLP = ({ launchDate }: { launchDate: string }) => {
       setTimeLeft(getTimeLeft(launchDate));
     }, 1000);
   }, [launchDate]);
+
 
   return (
     <div>
