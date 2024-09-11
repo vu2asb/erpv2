@@ -16,10 +16,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import Swal from "sweetalert2";
 import SpinnerPulse from "@/components/ui/spinnerPulse"; // import the spinner component
-import { useState } from "react"; // we will need this to mantain the loading state
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react"; // we will need this to mantain the loading state
 
 const formSchema = z.object({
   sfName: z
@@ -51,7 +51,40 @@ export default function WebRegister() {
   const wait = async (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
+  //----------------------------------------------
+  let [count, setCount] = useState(10); // Timer set for 30 seconds
 
+  useEffect(() => {
+    const intervalId = setInterval(function () {
+      count--;
+      //   console.log("useEffect for Timer function triggered; Count = " + count + "");
+      if (count == 0) {
+        clearInterval(intervalId);
+        console.log("Timeout :: Interval cleared.");
+        Swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: "Session Timed Out",
+          html: `
+          <h3 style="font-size: 1.1em; margin-bottom: 8px;">We're currently experiencing a system outage.</h3>
+          <h4 style="font-size: 0.9em; margin-bottom: 6px;">You shall be redirected</h4>
+          <h5 style="font-size: 0.9em; margin-bottom: 8px;">Thank you for your patience.</h5>
+          <h6 style="font-size: 0.8em; margin-bottom: 5px; color: green;">[MA-100]</h6>
+            `,
+          showConfirmButton: true,
+          timer: 10000,
+        });
+        // Replace 5000 with the desired delay in milliseconds
+        setTimeout(() => {
+          window.location.href = "/landings/lp-2";
+        }, 5000);
+      } else {
+        // console.log("Counting");
+      }
+    }, 1000); // setInterval value in milli seconds; e.g. 1000 means 1000ms = 1 sec
+  });
+
+  //-------------------------------------------------------------
   const searchParams = useSearchParams();
   const webRef = searchParams.get("wref");
   const webNote = searchParams.get("wnote");
@@ -171,8 +204,6 @@ export default function WebRegister() {
         // window.location.reload(); // use this for instant reload
       }
     };
-
-
     setLoading(false); // Set loading to false to stop showing the spinner
     fetchData()
       .then((data) => {
@@ -252,7 +283,9 @@ export default function WebRegister() {
           </div>
           <div className="">
             <Form {...form}>
-              <h1 className="my-2 text-2xl text-primary flex justify-center">Register NOW!</h1>
+              <h1 className="my-2 text-2xl text-primary flex justify-center">
+                Register NOW!
+              </h1>
               <form
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="w-[100%] flex flex-col justify-center py-2"
@@ -266,7 +299,7 @@ export default function WebRegister() {
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
                           <Input
-                            className="bg-slate-100 text-slate-900 text-xl"
+                            className="bg-slate-100 text-slate-900 text-0.5xl"
                             placeholder="Andrew"
                             type="text"
                             {...field}
@@ -286,7 +319,7 @@ export default function WebRegister() {
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
                           <Input
-                            className="bg-slate-100 text-slate-900 text-xl"
+                            className="bg-slate-100 text-slate-900 text-0.5xl"
                             placeholder="Sharma"
                             type="text"
                             {...field}
@@ -306,7 +339,7 @@ export default function WebRegister() {
                         <FormLabel>Email Address</FormLabel>
                         <FormControl>
                           <Input
-                            className="bg-slate-100 text-slate-900 text-xl"
+                            className="bg-slate-100 text-slate-900 text-0.5xl"
                             placeholder="Email Address"
                             type="email"
                             {...field}

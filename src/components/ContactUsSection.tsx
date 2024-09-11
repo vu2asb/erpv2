@@ -189,7 +189,7 @@ export default function ContactUsSection() {
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-slate-100 text-slate-950 text-xl"
+                        className="bg-slate-100 text-slate-950 text-0.5xl"
                         placeholder="Anderson"
                         type="text"
                         {...field}
@@ -210,7 +210,7 @@ export default function ContactUsSection() {
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-slate-100 text-slate-950 text-xl"
+                        className="bg-slate-100 text-slate-950 text-0.5xl"
                         placeholder="Smith"
                         type="text"
                         {...field}
@@ -231,7 +231,7 @@ export default function ContactUsSection() {
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-slate-100 text-slate-950 text-xl"
+                        className="bg-slate-100 text-slate-950 text-0.5xl"
                         placeholder="Email address"
                         type="email"
                         {...field}
@@ -252,7 +252,7 @@ export default function ContactUsSection() {
                     <FormLabel>Your message</FormLabel>
                     <FormControl>
                       <Textarea
-                        className="bg-slate-100 text-slate-950 text-xl"
+                        className="bg-slate-100 text-slate-950 text-0.5xl"
                         placeholder="I would like to know..."
                         rows={4}
                         {...field}

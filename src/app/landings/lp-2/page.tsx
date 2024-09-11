@@ -5,7 +5,7 @@ import TimerLP from "@/components/timer-lp";
 import { CiCalendar } from "react-icons/ci";
 
 // NOTE:
-// Set the webinar reference and webinar note that 
+// Set the webinar reference and webinar note that
 // will be sent to the webinar registration form as URP params
 // E.g.
 // const webinar_ref = "Web Ref-101";
@@ -14,9 +14,9 @@ const webinar_ref = "Web Ref-101";
 const webinar_note = "Note for Web Ref-101";
 
 // Set the duration of the counter here in minutes e.g. 10
-// E.g. 
-// const freqMins = 10;
-const freqMins = 10;
+// E.g.
+// const freqMins = 10; // Minuites
+const freqMins = 1;
 
 const monthNames = [
   "January",
@@ -102,29 +102,34 @@ const LandingPage2 = () => {
   return (
     <main className="container mx-auto h-screen flex justify-center items-center">
       <div className="px-4 w-full flex flex-col justify-center items-center">
-        <section className="m-20 p-20">
+        <section className="my-10 pt-10">
           <h1 className="text-2xl">The upper part of the landing page.</h1>
-          <Button
-            onClick={() => {
-              console.log("Button Clicked ...");
-              const url =
-                "http://localhost:3000/webinar-reg-form-with-schad-zod?wref=" +
-                webinar_ref +
-                "&wnote=" +
-                webinar_note +
-                "";
-              window.location.href = url;
-            }}
-          >
-            Click me
-          </Button>
+
+          <div className="flex justify-center place-items-center mt-10">
+            <Button
+              onClick={() => {
+                console.log("Button Clicked ...");
+                const url =
+                  "http://localhost:3000/webinar-reg-form-with-schad-zod?wref=" +
+                  webinar_ref +
+                  "&wnote=" +
+                  webinar_note +
+                  "";
+                window.location.href = url;
+              }}
+              className="text-xl"
+            >
+              SECURE MY SEAT
+            </Button>
+          </div>
         </section>
+
         <section className="m-10 p-5 flex flex-row">
           <div>
             <CiCalendar size={100} className="text-[#c9b7a3]" />
           </div>
           <div className="flex flex-col justify-items-center items-center my-auto mr-20 ml-20">
-            <span className="text-[#c9b7a3] text-[20px] mb-3">
+            <span className="text-[#c9b7a3] text-[20px] mb-1">
               Webinar Begins
             </span>
             <span className="text-[#c9b7a3] text-[15px]">
@@ -135,19 +140,25 @@ const LandingPage2 = () => {
               {tYear}
               {/* September, 15th, 2024 */}
             </span>
-            <span className="text-[#c9b7a3] text-[20px]">
+            <span className="text-[#c9b7a3] text-[28px]">
               {/* {tHour}:{(tMin < 10) ? `${tMin.toFixed(2)}`: tMin} {ampm} */}
               {tHour}:{tMin < 10 ? `0${tMin}` : tMin} {ampm}
             </span>
           </div>
-          <TimerLP launchDate={isoDateString} />
-          {/* 2024: Year
+
+          <div className="flex flex-col place-content-center">
+            <div className="text-[#c9b7a3] text-center text-2xl">Doors close in</div>
+            <div>
+              <TimerLP launchDate={isoDateString} />
+              {/* 2024: Year
             10: Month
             15: Day
             T: Separator between date and time
             17: Hour (in 24-hour format)
             00: Minute
             00: Second */}
+            </div>
+          </div>
         </section>
         <section className="m-20 p-20">
           <h1 className="text-2xl">The lower part of the landing page.</h1>
