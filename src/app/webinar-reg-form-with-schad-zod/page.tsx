@@ -18,8 +18,8 @@ import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
 import SpinnerPulse from "@/components/ui/spinnerPulse"; // import the spinner component
-import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react"; // we will need this to mantain the loading state
+import { useRouter } from 'next/router';
 
 const formSchema = z.object({
   sfName: z
@@ -43,7 +43,7 @@ const formSchema = z.object({
   swebinarNote: z.string().trim().optional(),
 });
 
-// const page = () => {
+// Entry >>>>
 export default function WebRegister() {
   let [users, setUsers] = useState([null]);
   let [loading, setLoading] = useState(false);
@@ -51,8 +51,8 @@ export default function WebRegister() {
   const wait = async (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
-  //----------------------------------------------
-  let [count, setCount] = useState(10); // Timer set for 30 seconds
+  //----------------------Timeout Timer Begins------------------------
+  let [count, setCount] = useState(40); // Timer set for 30 seconds
 
   useEffect(() => {
     const intervalId = setInterval(function () {
@@ -84,17 +84,18 @@ export default function WebRegister() {
     }, 1000); // setInterval value in milli seconds; e.g. 1000 means 1000ms = 1 sec
   });
 
-  //-------------------------------------------------------------
+  //-------------------------------Timeout Timer Ends------------------------------
   const searchParams = useSearchParams();
   const webRef = searchParams.get("wref");
   const webNote = searchParams.get("wnote");
-  // console.log(
-  //   "Parameters passed: Webinar Reference: " +
-  //     webRef +
-  //     ", Webinar Note: " +
-  //     webNote +
-  //     ""
-  // );
+  const tgtYear = searchParams.get("targetYear");
+  const tgtMonth = searchParams.get("targetMonth");
+  const tgtDay = searchParams.get("targetDay");
+  const tgtHour = searchParams.get("targetHour");
+  const tgtMin = searchParams.get("targetMin");
+  const tgtSec = searchParams.get("targetSec");
+  console.log("Reg Form Got:  yy: "+tgtYear+", mm: "+tgtMonth+", dd: "+tgtDay+", hr: "+tgtHour+", min: "+tgtMin+", sec: "+tgtSec+"");
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -115,21 +116,6 @@ export default function WebRegister() {
     // console.log({ values });
     values.swebinarRef = "W-101 Default Reference ...";
     values.swebinarNote = "W-101 Default Note ...";
-    // console.log(
-    //   "Submit button clicked. First Name: " +
-    //     values.sfName +
-    //     ", Last Name: " +
-    //     values.slName +
-    //     ", email: " +
-    //     values.semail +
-    //     ", Time Stamp: " +
-    //     values.stimeStamp +
-    //     ", Webinar Reference: " +
-    //     webRef +
-    //     " and Webinar Note: " +
-    //     webNote +
-    //     ""
-    // );
 
     var fName = values.sfName;
     var lName = values.slName;
@@ -181,7 +167,8 @@ export default function WebRegister() {
         //---------swal ends----------
         // Need to reload the page now
         await wait(10000);
-        window.location.reload(); // use this for instant reload
+        window.location.reload();
+        // window.location.reload(); // use this for instant reload
         return;
       }
       if (response.status == 200) {
@@ -193,15 +180,16 @@ export default function WebRegister() {
           title: "Registration Done!",
           showConfirmButton: false,
         });
-        // Need to reload the page now
-        // await wait(3000);
+        // Need to redirect the page to the waiting room now
+        await wait(3000);
         // window.location.reload();
         // return;
         // Replace 3000 with the desired delay in milliseconds
         setTimeout(() => {
-          window.location.reload();
+          const urlStringToPass = "/waiting-room?year="+tgtYear+"&month="+tgtMonth+"&day="+tgtDay+"&hour="+tgtHour+"&min="+tgtMin+"&sec="+tgtSec+"";
+          window.location.href = urlStringToPass;
         }, 3000);
-        // window.location.reload(); // use this for instant reload
+        return;
       }
     };
     setLoading(false); // Set loading to false to stop showing the spinner
