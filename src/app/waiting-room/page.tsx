@@ -88,26 +88,28 @@ const WaitingRoom = () => {
   //---------------Timer Ends-----------------------
   return (
     <>
-<div className="bg-cover w-full h-full bg-no-repeat bg-[url('/assets/buildings.jpg')]">
-  <div className="mx-auto flex items-center justify-center h-screen">
-    <div className="w-[82%] h-[30.2%] bg-slate-800 opacity-90 border rounded text-center sm:h-[65%] lg:h-[32vh] xl:h-[45vh] 2xl:h-[31vh] 2xl:w-[35%]">
-
-
-      <h1 className="text-gray-50 text-[5vw] mt-[4vh] sm:text-green-500 md:text-yellow-400 lg:text-blue-500 xl:text-pink-500 2xl:text-lime-400 2xl:text-[1.5vw]">
+      <div className="bg-cover w-full h-full bg-no-repeat bg-[url('/assets/waiting-area.jpg')]">
+        <div className="mx-auto flex items-center justify-center h-screen">
+          <div className="w-[82%] h-[30.2%] bg-slate-800 opacity-85 border rounded text-center sm:h-[65%] lg:h-[32vh] xl:h-[22vw] xl:w-[40vw] 2xl:h-[31vh] 2xl:w-[35%]">
+            <h1 className="text-gray-50 text-[5vw] mt-[3vh]  xl:text-[2.4vw] 2xl:text-[1.5vw]">
+              Welcome to the waiting room
+            </h1>
+            {/* <h1 className="text-gray-50 text-[5vw] mt-[3vh] sm:text-green-500 md:text-yellow-400 lg:text-blue-500 xl:text-[2.4vw] xl:text-pink-500 2xl:text-lime-400 2xl:text-[1.5vw]">
         Welcome to the waiting room
-      </h1>
-      <h1 className="text-gray-50 text-[3.8vw] mt-[3vh] lg:text-[3.2vw] 2xl:text-[1.4vw]">
-        Kindly settle down
-      </h1>
-      <h1 className="text-gray-50 text-[2.5vw] mt-[4vh] mb-[1.8vh] lg:text-[2vw] mt-[4vh] 2xl:text-[1vw]">
-        Webinar begins in ...
-      </h1>
-
-      <span className="text-[4vw] text-orange-700 sm:text-[3vw] lg:text-[1.4vw] 2xl:text-[1.5vw]" id="counter"></span>
-    </div>
-  </div>
-</div>
-
+      </h1> */}
+            <h1 className="text-gray-50 text-[3.8vw] mt-[3vh] lg:text-[3.2vw] xl:text-[2vw] 2xl:text-[1.4vw]">
+              Kindly settle down
+            </h1>
+            <h1 className="text-gray-50 text-[2.5vw] mt-[4vh] mb-[1.8vh] lg:text-[2vw] lg:mt-[4vh] xl:text-[1.2vw] 2xl:text-[1vw]">
+              Webinar begins in ...
+            </h1>
+            <span
+              className="text-[4vw] text-orange-700 sm:text-[3vw] lg:text-[3vw] 2xl:text-[1.5vw]"
+              id="counter"
+            ></span>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

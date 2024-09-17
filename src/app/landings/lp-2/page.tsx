@@ -115,11 +115,11 @@ const LandingPage2 = () => {
   const dMonth = tMonth - nmonth;
   const dDay = tDay - nday;
 
-// if(nhour >= 12){
-//   nhour = 0;
-// }
+if(nhour >= 12){
+  nhour -=12;
+}
  
-const dHour = tHour;
+const dHour = tHour - nhour;
 
 
 

@@ -52,7 +52,7 @@ export default function WebRegister() {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
   //----------------------Timeout Timer Begins------------------------
-  let [count, setCount] = useState(40); // Timer set for 30 seconds
+  let [count, setCount] = useState(60); // Timer set for 60 seconds
 
   useEffect(() => {
     const intervalId = setInterval(function () {
