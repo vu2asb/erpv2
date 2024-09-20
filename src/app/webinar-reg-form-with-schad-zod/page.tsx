@@ -185,8 +185,10 @@ export default function WebRegister() {
         // window.location.reload();
         // return;
         // Replace 3000 with the desired delay in milliseconds
+        /* regTime = "20-9-24 1:01 PM"; */
+        console.log("Reg-Form:: Reg Time = "+regTime);
         setTimeout(() => {
-          const urlStringToPass = "/waiting-room?year="+tgtYear+"&month="+tgtMonth+"&day="+tgtDay+"&hour="+tgtHour+"&min="+tgtMin+"&sec="+tgtSec+"";
+          const urlStringToPass = "/waiting-room?email="+email+"&fname="+fName+"&lname="+lName+"&regtime="+regTime+"&webinarref="+webinarRef+"&webinarnote="+webinarNote+"&year="+tgtYear+"&month="+tgtMonth+"&day="+tgtDay+"&hour="+tgtHour+"&min="+tgtMin+"&sec="+tgtSec+"";
           window.location.href = urlStringToPass;
         }, 3000);
         return;

@@ -18,7 +18,7 @@ const webinar_note = "Note for Web Ref-101";
 // Set the duration of the counter here in minutes e.g. 10
 // E.g.
 // const freqMins = 10; // Minuites
-const freqMins = 20;
+const freqMins = 1;
 
 const monthNames = [
   "January",

@@ -7,8 +7,13 @@ import React, { useState, useEffect } from "react";
 const WaitingRoom = () => {
   // from registeration page:: const urlStringToPass = "/waiting-room?year="+tgtYear+"&month="+tgtMonth+"&day="+tgtDay+"&hour="+tgtHour+"&min="+tgtMin+"&sec="+tgtSec+"";
   const searchParams = useSearchParams();
-  const webRef = searchParams.get("wref");
-  const webNote = searchParams.get("wnote");
+  const webemail = searchParams.get("email");
+  const webfname = searchParams.get("fname");
+  const weblname = searchParams.get("lname");
+  const webregtime = searchParams.get("regtime");
+  const webRef = searchParams.get("webinarref");
+  const webNote = searchParams.get("webinarnote");
+
   const tgtYear = searchParams.get("year");
   const tgtMonth = searchParams.get("month");
   const tgtDay = searchParams.get("day");
@@ -26,7 +31,19 @@ const WaitingRoom = () => {
   console.log("Waiting Room Calculated seconds: " + countDown);
 
   console.log(
-    "Waiting Room Got:  yy: " +
+    "Waiting Room Got: Email: " +
+      webemail +
+      ", F-Name: " +
+      webfname +
+      ", L-Name: " +
+      weblname +
+      ", Reg-Time: " +
+      webregtime +
+      ", W-Ref: " +
+      webRef +
+      ". W-Note: " +
+      webNote +
+      ", yy: " +
       tgtYear +
       ", mm: " +
       tgtMonth +
@@ -57,7 +74,7 @@ const WaitingRoom = () => {
         // console.log("Timeout :: Interval cleared.");
         console.log("Proceeding to webinar ...");
         // redirect to webinar player page
-        window.location.href = "/player";
+        window.location.href = "/player?email="+webemail+"&fname="+webfname+"&lname="+weblname+"&webref="+webRef+"";
       } else {
         /*console.log("useEffect for Timer function triggered; Count = " + count + ""
         );*/
