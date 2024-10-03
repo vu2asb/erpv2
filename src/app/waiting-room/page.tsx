@@ -121,7 +121,7 @@ const WaitingRoom = () => {
               Webinar begins in ...
             </h1>
             <span
-              className="text-[4vw] text-orange-700 sm:text-[3vw] lg:text-[3vw] 2xl:text-[1.5vw]"
+              className="text-[4vw] text-orange-400 sm:text-[3vw] lg:text-[3vw] 2xl:text-[1.5vw]"
               id="counter"
             ></span>
           </div>
