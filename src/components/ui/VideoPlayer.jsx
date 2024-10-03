@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import videojs from "video.js";
 import Hls from "hls.js";
 import "video.js/dist/video-js.css";
@@ -13,11 +12,24 @@ let vRef = null;
 let videoDuration = 0;
 let isMuted = true;
 
+// Log browser details only if in browser context
+const logBrowserDetails = () => {
+  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+    const userAgent = navigator.userAgent;
+    console.log("Browser Details:");
+    console.log("User Agent:", userAgent);
+  }
+};
+
 const VideoPlayer = ({ src }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+  const [message, setMessage] = useState("SET SAFE VOLUME LEVEL & CLICK TO UNMUTE");
 
   useEffect(() => {
+    logBrowserDetails();  // Log browser details when the component is mounted
+
     playerRef.current = videojs(videoRef.current, {
       controls: false,
       muted: false,
@@ -43,11 +55,16 @@ const VideoPlayer = ({ src }) => {
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         console.log("Manifest parsing Okay!");
         console.log("Playing current reference");
-
         videoRef.current.muted = true;
         vRef.play();
         vRef.volume = 1;
         console.log("Volume: " + vRef.volume);
+
+        var player = videojs(playerRef);
+        player.on("loadedmetadata", function () {
+          var Duration = player.duration();
+          console.log("Video duration:", Duration, "seconds");
+        });
       });
     } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
       console.log("The native video player can handle HLS");
@@ -62,42 +79,33 @@ const VideoPlayer = ({ src }) => {
   }, [src]);
 
   useEffect(() => {
-    let MuteToggle = null;
-    let topMsg = null;
+    let tCount = 0;
+    const myInterval = setInterval(function () {
+      tCount++;
+      const percentViewed = Math.trunc((vRef.currentTime * 100) / vRef.duration);
+      console.log("%age complete: " + percentViewed + " %");
 
-    // Only access document if we are in the browser environment
-    if (typeof document !== "undefined") {
-      MuteToggle = document.getElementById("btn");
-      topMsg = document.getElementById("topMmessage");
-    }
-
-    // You can add event listeners or other logic using these elements if necessary
+      if (vRef.ended) {
+        console.log("Timer:: Video Ended");
+        clearInterval(myInterval);
+      }
+    }, 1000);
+    
+    return () => clearInterval(myInterval); // Cleanup on component unmount
   }, []);
-
-  let tCount = 0;
-  const myInterval = setInterval(function () {
-    tCount++;
-    console.log("Timer:: Elapsed Time: " + tCount);
-    if (vRef.ended) {
-      console.log("Timer:: Video Ended");
-      clearInterval(myInterval);
-    }
-  }, 1000);
 
   const handleUnmute = () => {
     console.log("Unmute Button Clicked!");
     videoRef.current.muted = false;
     console.log("Button clicked! Unmuting");
-    isMuted = false;
-    if (typeof document !== "undefined") {
-      document.getElementById("topMmessage").innerHTML = "DO NOT CLOSE THIS TAB";
-    }
+    setMuted(false);
+    setMessage("DO NOT CLOSE THIS TAB");
   };
 
   return (
     <div className="flex flex-col place-items-center bg-slate-800">
       <div className="bg-slate-400 flex justify-center items-center py-3">
-        {isMuted && (
+        {muted && (
           <button
             id="btn"
             onClick={handleUnmute}
@@ -113,8 +121,8 @@ const VideoPlayer = ({ src }) => {
                   width="20"
                 />
               </span>
-              <span id="topMmessage" className="text-[5px]">
-                SET SAFE VOLUME LEVEL & CLICK TO UNMUTE
+              <span className="text-[2px]">
+                {message}
               </span>
               <span>
                 <img
@@ -137,6 +145,8 @@ const VideoPlayer = ({ src }) => {
             height: "auto",
           }}
           className="video-js vjs-control-bar"
+          controls={false}  // Explicitly set controls to false
+          playsInline  // Allow inline playback on mobile devices
         ></video>
       </div>
     </div>
