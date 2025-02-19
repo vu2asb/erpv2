@@ -80,7 +80,7 @@ export default function ContactUsSection() {
     try {
       setLoading(true); // Set loading to true to start showing the spinner
       const response = await fetch(
-        "http://localhost:3000/api/persist-contact-form-datax",
+        "http://localhost:3000/api/persist-contact-form-data",
         {
           method: "POST",
           body: JSON.stringify({ tFname, tLname, temail, tstamp, tmessage }),
